@@ -1,18 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class IndexState {
-  int index;
-
-  IndexState([this.index = 0]);
-}
-
-abstract class IndexEvent {}
-
-class ChangeIndex extends IndexEvent {
-  final int index;
-
-  ChangeIndex(this.index);
-}
+part 'index_state.dart';
+part 'index_event.dart';
 
 class IndexController extends Bloc<IndexEvent, IndexState> {
   IndexController() : super(IndexState()) {

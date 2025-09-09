@@ -1,18 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class NameState {
-  String name;
-
-  NameState([this.name = '']);
-}
-
-abstract class NameEvent {}
-
-class ChangeName extends NameEvent {
-  final String newName;
-
-  ChangeName(this.newName);
-}
+part 'name_state.dart';
+part 'name_event.dart';
 
 class NameController extends Bloc<NameEvent, NameState> {
   NameController([String name = '']) : super(NameState(name)) {

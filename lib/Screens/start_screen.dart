@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/widgets/custom_form_field.dart';
-import '../core/controllers/name_controller.dart';
+import '../core/controllers/name_controller/name_controller.dart';
 import 'home_screen.dart';
 
 class StartScreen extends StatelessWidget {

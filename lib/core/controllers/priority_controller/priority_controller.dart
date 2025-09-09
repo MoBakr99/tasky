@@ -1,18 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class PriorityState {
-  final bool highPriority;
-
-  PriorityState({this.highPriority = false});
-}
-
-abstract class PriorityEvent {}
-
-class ChangePriority extends PriorityEvent {
-  final bool newPriority;
-
-  ChangePriority(this.newPriority);
-}
+part 'priority_state.dart';
+part 'priority_event.dart';
 
 class PriorityController extends Bloc<PriorityEvent, PriorityState> {
   PriorityController() : super(PriorityState()) {
