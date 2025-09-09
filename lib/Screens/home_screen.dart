@@ -5,7 +5,7 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 import '../core/controllers/name_controller/name_controller.dart';
 import '../core/controllers/tasks_controller/task_model.dart';
 import '../core/controllers/index_controller/index_controller.dart';
-import 'add_task_screen.dart';
+import 'task_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -182,6 +182,16 @@ class HomeScreen extends StatelessWidget {
                                     ],
                                     // onPressed: () {},
                                   ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TaskDetailsScreen(
+                                                taskKey: tasks[index].key),
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
                             },
@@ -201,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddTaskScreen(),
+                    builder: (context) => TaskDetailsScreen(),
                   ),
                 );
               },

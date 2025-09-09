@@ -5,8 +5,16 @@ import '../core/widgets/custom_form_field.dart';
 import '../core/controllers/tasks_controller/task_model.dart';
 import '../core/controllers/priority_controller/priority_controller.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen({super.key});
+class TaskDetailsScreen extends StatelessWidget {
+  TaskDetailsScreen({super.key, this.taskKey}) {
+    if (taskKey != null) {
+      final task = Hive.box<Task>('tasks').get(taskKey);
+      _taskNameController.text = task!.name;
+      _taskDescriptionController.text = task.description ?? '';
+    }
+  }
+
+  final int? taskKey;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -18,11 +26,12 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => PriorityController(),
+      create: (BuildContext context) => PriorityController(
+          Hive.box<Task>('tasks').get(taskKey)?.highPriority ?? false),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'New Task',
+            taskKey == null ? 'New Task' : 'Edit Task',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
@@ -94,23 +103,30 @@ class AddTaskScreen extends StatelessWidget {
                 return FloatingActionButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Hive.box<Task>('tasks').add(Task(
+                      final task = Task(
                         name: _taskNameController.text.trim(),
                         description: _taskDescriptionController.text.trim(),
                         highPriority: context
                             .read<PriorityController>()
                             .state
                             .highPriority,
-                      ));
+                      );
+                      if (taskKey == null) {
+                        Hive.box<Task>('tasks').add(task);
+                      } else {
+                        task.completed =
+                            Hive.box<Task>('tasks').get(taskKey)!.completed;
+                        Hive.box<Task>('tasks').put(taskKey, task);
+                      }
                       Navigator.of(context).pop();
                     }
                   },
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.add),
-                      SizedBox(width: 10),
-                      Text('Add Task'),
+                      const Icon(Icons.add),
+                      const SizedBox(width: 10),
+                      Text(taskKey == null ? 'Add Task' : 'Save Changes'),
                     ],
                   ),
                 );

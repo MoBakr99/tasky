@@ -3,7 +3,8 @@ part 'priority_state.dart';
 part 'priority_event.dart';
 
 class PriorityController extends Bloc<PriorityEvent, PriorityState> {
-  PriorityController() : super(PriorityState()) {
+  PriorityController([bool highPriority = false])
+      : super(PriorityState(highPriority: highPriority)) {
     on<ChangePriority>((event, emit) {
       emit(PriorityState(highPriority: event.newPriority));
     });
