@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'index_state.dart';
 part 'index_event.dart';
 

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../core/controllers/user_controller/user_controller.dart';
 import '../core/widgets/custom_form_field.dart';
-import '../core/controllers/name_controller/name_controller.dart';
-import 'home_screen.dart';
+import 'main_screen.dart';
 
 class StartScreen extends StatelessWidget {
   StartScreen({super.key});
@@ -19,8 +20,8 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NameController, NameState>(
-        builder: (BuildContext context, NameState nameState) => Scaffold(
+    return BlocBuilder<UserController, UserState>(
+        builder: (BuildContext context, UserState userState) => Scaffold(
               body: SingleChildScrollView(
                 child: SafeArea(
                   child: Center(
@@ -92,22 +93,26 @@ class StartScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: SizedBox(
+                            height: 40,
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  nameState.name = _nameController.text.trim();
+                                  userState.name = _nameController.text.trim();
+                                  userState.quote =
+                                      'One Task at a Time.One Step Closer.';
                                   SharedPreferences.getInstance().then(
                                     (prefs) {
                                       prefs.setString(
-                                          'username', nameState.name);
+                                          'username', userState.name);
+                                      prefs.setString('quote', userState.quote);
                                     },
                                   );
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const HomeScreen()));
+                                              const MainScreen()));
                                 }
                               },
                               child: const Text(

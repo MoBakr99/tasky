@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'priority_state.dart';
 part 'priority_event.dart';
 

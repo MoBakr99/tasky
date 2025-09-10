@@ -7,6 +7,7 @@ class CustomFormField extends StatelessWidget {
   final String? hintText;
   final int maxLines;
   final bool? autofocus;
+  final bool border;
 
   const CustomFormField(
       {super.key,
@@ -15,7 +16,8 @@ class CustomFormField extends StatelessWidget {
       this.validator,
       this.hintText,
       this.maxLines = 1,
-      this.autofocus});
+      this.autofocus,
+      this.border = false});
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,29 @@ class CustomFormField extends StatelessWidget {
             hintText: hintText,
             fillColor: const Color(0xFF282828),
             hintStyle: const TextStyle(color: Color(0xff6D6D6D), fontSize: 16),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide.none,
+            border: OutlineInputBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(maxLines > 1 ? 20 : 16)),
+              borderSide: border
+                  ? const BorderSide(width: 0.5, color: Color(0xFF6E6E6E))
+                  : BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(maxLines > 1 ? 20 : 16)),
+              borderSide: border
+                  ? const BorderSide(width: 0.5, color: Color(0xFF6E6E6E))
+                  : BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(maxLines > 1 ? 20 : 16)),
+              borderSide: border
+                  ? const BorderSide(
+                      width: 1,
+                      color: Color(
+                          0xFF6E6E6E)) // Example: thicker border when focused
+                  : BorderSide.none,
             ),
           ),
           maxLines: maxLines,

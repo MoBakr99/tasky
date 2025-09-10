@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'core/controllers/name_controller/name_controller.dart';
+
+import 'core/controllers/user_controller/user_controller.dart';
 import 'core/controllers/tasks_controller/task_model.dart';
 import 'themes/themes.dart';
-import 'Screens/home_screen.dart';
+import 'Screens/main_screen.dart';
 import 'Screens/start_screen.dart';
 
 void main() async {
@@ -13,13 +14,11 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
   await Hive.openBox<Task>('tasks');
-  final String? username = await SharedPreferences.getInstance().then(
-    (value) {
-      return value.getString('username');
-    },
-  );
+  final prefs = await SharedPreferences.getInstance();
+  final String? username = prefs.getString('username');
+  final String? quote = prefs.getString('quote');
   runApp(BlocProvider(
-      create: (BuildContext context) => NameController(username ?? ''),
+      create: (BuildContext context) => UserController(username ?? '', quote ?? ''),
       child: const MyApp()));
 }
 
@@ -32,9 +31,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(context),
-      home: BlocBuilder<NameController, NameState>(
-          builder: (BuildContext context, NameState nameState) =>
-              nameState.name.isEmpty ? StartScreen() : const HomeScreen()),
+      home: BlocBuilder<UserController, UserState>(
+          builder: (BuildContext context, UserState userState) =>
+              userState.name.isEmpty ? StartScreen() : const MainScreen()),
     );
   }
 }

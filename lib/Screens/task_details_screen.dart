@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:tasky/core/widgets/main_app_bar.dart';
+
 import '../core/widgets/custom_form_field.dart';
 import '../core/controllers/tasks_controller/task_model.dart';
 import '../core/controllers/priority_controller/priority_controller.dart';
@@ -29,10 +31,10 @@ class TaskDetailsScreen extends StatelessWidget {
       create: (BuildContext context) => PriorityController(
           Hive.box<Task>('tasks').get(taskKey)?.highPriority ?? false),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            taskKey == null ? 'New Task' : 'Edit Task',
-            style: Theme.of(context).textTheme.headlineSmall,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(64),
+          child: MainAppBar(
+            title: taskKey == null ? 'New Task' : 'Edit Task',
           ),
         ),
         body: SingleChildScrollView(
@@ -86,7 +88,6 @@ class TaskDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 50),
                   ],
                 ),
               ),
