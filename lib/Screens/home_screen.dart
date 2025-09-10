@@ -36,7 +36,10 @@ class HomeScreen extends StatelessWidget {
           leading: Padding(
             padding: const EdgeInsets.only(left: 16),
             child: SvgPicture.asset('assets/svg/avatar.svg',
-                width: 42, height: 42),
+                colorFilter:
+                    const ColorFilter.mode(Color(0xFFFFFCFC), BlendMode.srcIn),
+                width: 42,
+                height: 42),
           ),
           leadingWidth: 58, // 42 + 16
           actions: [
@@ -186,9 +189,8 @@ class HomeScreen extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            TaskDetailsScreen(
-                                                taskKey: tasks[index].key),
+                                        builder: (context) => TaskDetailsScreen(
+                                            taskKey: tasks[index].key),
                                       ),
                                     );
                                   },
