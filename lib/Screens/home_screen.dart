@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/core/controllers/theme_controller/theme_controller.dart';
 
 import '../core/controllers/user_controller/user_controller.dart';
@@ -63,6 +64,9 @@ class HomeAppBar extends StatelessWidget {
                   context
                       .read<ThemeController>()
                       .add(themeState.isDark ? LightTheme() : DarkTheme());
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setBool('isDark', themeState.isDark);
+                  });
                 },
                 tooltip: 'Settings',
                 style: ButtonStyle(
