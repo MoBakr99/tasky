@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasky/core/widgets/main_app_bar.dart';
-// import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import '../core/controllers/tasks_controller/task_model.dart';
 import '../core/controllers/index_controller/index_controller.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'tasks_screen.dart';
-// import 'task_details_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -76,8 +74,8 @@ class MainScreen extends StatelessWidget {
                 context.read<IndexController>().add(ChangeIndex(index));
               },
               currentIndex: indexState.index,
-              selectedItemColor: const Color(0xFF15B86C),
-              unselectedItemColor: const Color(0xFFC6C6C6),
+              // selectedItemColor: const Color(0xFF15B86C),
+              // unselectedItemColor: const Color(0xFFC6C6C6),
               selectedFontSize: 12,
               type: BottomNavigationBarType.fixed,
               showUnselectedLabels: true,
@@ -91,8 +89,12 @@ class MainScreen extends StatelessWidget {
                       height: 18,
                       colorFilter: ColorFilter.mode(
                         indexState.index == 0
-                            ? const Color(0xFF15B86C)
-                            : const Color(0xFFC6C6C6),
+                            ? Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .selectedItemColor!
+                            : Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .unselectedItemColor!,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -108,8 +110,12 @@ class MainScreen extends StatelessWidget {
                         height: 18,
                         colorFilter: ColorFilter.mode(
                           indexState.index == 1
-                              ? const Color(0xFF15B86C)
-                              : const Color(0xFFC6C6C6),
+                              ? Theme.of(context)
+                                  .bottomNavigationBarTheme
+                                  .selectedItemColor!
+                              : Theme.of(context)
+                                  .bottomNavigationBarTheme
+                                  .unselectedItemColor!,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -124,8 +130,12 @@ class MainScreen extends StatelessWidget {
                       height: 18,
                       colorFilter: ColorFilter.mode(
                         indexState.index == 2
-                            ? const Color(0xFF15B86C)
-                            : const Color(0xFFC6C6C6),
+                            ? Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .selectedItemColor!
+                            : Theme.of(context)
+                                .bottomNavigationBarTheme
+                                .unselectedItemColor!,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -141,8 +151,12 @@ class MainScreen extends StatelessWidget {
                         height: 18,
                         colorFilter: ColorFilter.mode(
                           indexState.index == 3
-                              ? const Color(0xFF15B86C)
-                              : const Color(0xFFC6C6C6),
+                              ? Theme.of(context)
+                                  .bottomNavigationBarTheme
+                                  .selectedItemColor!
+                              : Theme.of(context)
+                                  .bottomNavigationBarTheme
+                                  .unselectedItemColor!,
                           BlendMode.srcIn,
                         ),
                       ),

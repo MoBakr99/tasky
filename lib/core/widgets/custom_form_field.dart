@@ -26,7 +26,7 @@ class CustomFormField extends StatelessWidget {
       children: [
         Text(
           fieldTitle,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -34,23 +34,27 @@ class CustomFormField extends StatelessWidget {
           validator: validator,
           autofocus: autofocus ?? false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          maxLines: maxLines,
+          style: Theme.of(context).textTheme.titleLarge,
           decoration: InputDecoration(
-            filled: true,
             hintText: hintText,
-            fillColor: const Color(0xFF282828),
-            hintStyle: const TextStyle(color: Color(0xff6D6D6D), fontSize: 16),
+            hintStyle: TextStyle(
+                color: Theme.of(context).textTheme.labelSmall!.color,
+                fontSize: 16),
             border: OutlineInputBorder(
               borderRadius:
                   BorderRadius.all(Radius.circular(maxLines > 1 ? 20 : 16)),
               borderSide: border
-                  ? const BorderSide(width: 0.5, color: Color(0xFF6E6E6E))
+                  ? BorderSide(
+                      width: 0.5, color: Theme.of(context).dividerColor)
                   : BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.all(Radius.circular(maxLines > 1 ? 20 : 16)),
               borderSide: border
-                  ? const BorderSide(width: 0.5, color: Color(0xFF6E6E6E))
+                  ? BorderSide(
+                      width: 0.5, color: Theme.of(context).dividerColor)
                   : BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
@@ -64,7 +68,6 @@ class CustomFormField extends StatelessWidget {
                   : BorderSide.none,
             ),
           ),
-          maxLines: maxLines,
         ),
       ],
     );

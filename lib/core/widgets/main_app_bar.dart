@@ -10,7 +10,7 @@ class MainAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: BackButton(
-        color: Colors.white,
+        color: Theme.of(context).textTheme.titleLarge?.color,
         onPressed: onBackButtonPressed,
       ),
       title: Text(

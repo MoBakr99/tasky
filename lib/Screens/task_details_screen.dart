@@ -69,18 +69,18 @@ class TaskDetailsScreen extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Text('High Priority',
-                            style: Theme.of(context).textTheme.bodyLarge),
+                            style: Theme.of(context).textTheme.titleLarge),
                         const Spacer(),
                         BlocBuilder<PriorityController, PriorityState>(
                           builder: (BuildContext context,
                                   PriorityState priorityState) =>
                               Switch(
-                            value: priorityState.highPriority,
                             onChanged: (value) {
                               context
                                   .read<PriorityController>()
                                   .add(ChangePriority(value));
                             },
+                            value: priorityState.highPriority,
                             activeColor: const Color(0xfffffcfc),
                             activeTrackColor:
                                 Theme.of(context).colorScheme.primary,
