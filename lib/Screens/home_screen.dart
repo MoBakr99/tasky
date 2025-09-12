@@ -65,7 +65,7 @@ class HomeAppBar extends StatelessWidget {
                       .read<ThemeController>()
                       .add(themeState.isDark ? LightTheme() : DarkTheme());
                   SharedPreferences.getInstance().then((prefs) {
-                    prefs.setBool('isDark', themeState.isDark);
+                    prefs.setBool('isDark', !themeState.isDark);
                   });
                 },
                 tooltip: 'Settings',

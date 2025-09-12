@@ -159,6 +159,9 @@ class ProfileBody extends StatelessWidget {
                       onTap: () {
                         context.read<ThemeController>().add(
                             themeState.isDark ? LightTheme() : DarkTheme());
+                        SharedPreferences.getInstance().then((prefs) {
+                          prefs.setBool('isDark', !themeState.isDark);
+                        });
                       },
                     ),
                     const SizedBox(
