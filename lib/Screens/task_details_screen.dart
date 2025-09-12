@@ -127,7 +127,13 @@ class TaskDetailsScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.add),
                       const SizedBox(width: 10),
-                      Text(taskKey == null ? 'Add Task' : 'Save Changes'),
+                      Text(
+                        taskKey == null ? 'Add Task' : 'Save Changes',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: const Color(0xfffffcfc)),
+                      ),
                     ],
                   ),
                 );

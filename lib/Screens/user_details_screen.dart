@@ -92,12 +92,18 @@ class UserDetailsScreen extends StatelessWidget {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add),
-                    SizedBox(width: 10),
-                    Text('Save Changes'),
+                    const Icon(Icons.add),
+                    const SizedBox(width: 10),
+                    Text(
+                      'Save Changes',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: const Color(0xfffffcfc)),
+                    ),
                   ],
                 ),
               );

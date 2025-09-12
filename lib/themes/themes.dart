@@ -12,10 +12,10 @@ class Themes {
   static ThemeData dark(BuildContext context) => ThemeData(
         primaryColor: Colors.green,
         colorScheme: const ColorScheme.dark(
-          primary: primaryDarkColor,
-          secondary: Colors.greenAccent,
-          surface: Color(0xff181818),
-        ),
+            primary: primaryDarkColor,
+            secondary: Colors.greenAccent,
+            surface: Color(0xff181818),
+            outline: Color(0xffffffff)),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryDarkColor,
@@ -43,7 +43,6 @@ class Themes {
             borderRadius: BorderRadius.circular(30),
           ),
         ),
-
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
             fontSize: 28,
@@ -92,10 +91,10 @@ class Themes {
   static ThemeData light(BuildContext context) => ThemeData(
         primaryColor: Colors.green,
         colorScheme: const ColorScheme.light(
-          primary: primaryLightColor,
-          secondary: Colors.greenAccent,
-          surface: Color(0xFFF6F7F9),
-        ),
+            primary: primaryLightColor,
+            secondary: Colors.greenAccent,
+            surface: Color(0xFFF6F7F9),
+            outline: Color(0xff9e9e9e)),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryLightColor,
@@ -124,7 +123,6 @@ class Themes {
             borderRadius: BorderRadius.circular(30),
           ),
         ),
-
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
             fontSize: 28,

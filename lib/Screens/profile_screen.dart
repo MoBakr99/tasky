@@ -147,10 +147,6 @@ class ProfileBody extends StatelessWidget {
                         value: themeState.isDark,
                         activeColor: const Color(0xfffffcfc),
                         activeTrackColor: Theme.of(context).colorScheme.primary,
-                        inactiveThumbColor: const Color(0xff9e9e9e),
-                        trackOutlineColor: !themeState.isDark
-                            ? const WidgetStatePropertyAll(Color(0xff9e9e9e))
-                            : null,
                         onChanged: (value) {
                           context
                               .read<ThemeController>()
@@ -197,21 +193,50 @@ class ProfileBody extends StatelessWidget {
                             : null,
                       ),
                       onTap: () {
-                        context.read<UserController>().add(ChangeName(''));
-                        context.read<UserController>().add(ChangeQuote(''));
-                        Hive.box<Task>('tasks').clear();
-                        SharedPreferences.getInstance().then(
-                          (prefs) {
-                            prefs.clear();
-                            prefs.setBool('isDark', themeState.isDark);
-                          },
-                        );
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StartScreen(),
-                          ),
-                        );
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Log Out'),
+                                  content: const Text(
+                                      'Are You Sure You Want to Erase All Your Data?'),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          context
+                                              .read<UserController>()
+                                              .add(ChangeName(''));
+                                          context
+                                              .read<UserController>()
+                                              .add(ChangeQuote(''));
+                                          Hive.box<Task>('tasks').clear();
+                                          SharedPreferences.getInstance().then(
+                                            (prefs) {
+                                              prefs.clear();
+                                              prefs.setBool(
+                                                  'isDark', themeState.isDark);
+                                            },
+                                          );
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  StartScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: const Text('Yes')),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('No'))
+                                  ],
+                                ));
                       },
                     ),
                   ],

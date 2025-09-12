@@ -20,7 +20,9 @@ class HomeAppBar extends StatelessWidget {
               builder: (BuildContext context, UserState userState) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Good Evening ,${userState.name}',
+                      Text(
+                          'Good Evening ,'
+                          '${userState.name.contains(' ') ? userState.name.substring(0, userState.name.indexOf(' ')) : userState.name}',
                           style: Theme.of(context).textTheme.titleLarge),
                       Text(
                         userState.quote,
