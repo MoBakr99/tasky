@@ -15,7 +15,7 @@ class StartScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
 
   bool _isValidName(String name) {
-    return (!name.contains(RegExp(r'[^a-zA-Z\s]')) && name.length >= 3);
+    return (!name.contains(RegExp(r'[^a-zA-Z\sء-ي]')) && name.length >= 3);
   }
 
   @override
