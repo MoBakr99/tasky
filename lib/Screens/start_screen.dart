@@ -84,7 +84,7 @@ class StartScreen extends StatelessWidget {
                                   (value == null || value.trim().isEmpty)
                                       ? 'Please enter your name'
                                       : (!_isValidName(value.trim()))
-                                          ? 'Name must be at least 3 letters'
+                                          ? 'Name must be at least 3 letters without special characters'
                                           : null,
                             ),
                           ),

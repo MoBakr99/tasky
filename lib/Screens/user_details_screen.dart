@@ -16,6 +16,9 @@ class UserDetailsScreen extends StatelessWidget {
   final TextEditingController _taskDescriptionController =
       TextEditingController();
 
+  bool _isValidName(String name) =>
+      (!name.contains(RegExp(r'[^a-zA-Z\sء-ي]')) && name.length >= 3);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +42,12 @@ class UserDetailsScreen extends StatelessWidget {
                         hintText: 'Enter your name',
                         controller: _taskNameController,
                         border: true,
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Please enter your name';
-                          }
-                          return null;
-                        },
+                        validator: (value) => (value == null ||
+                                value.trim().isEmpty)
+                            ? 'Please enter your name'
+                            : (!_isValidName(value.trim()))
+                                ? 'Name must be at least 3 letters without special characters'
+                                : null,
                       ),
                       const SizedBox(height: 20),
                       CustomFormField(
